@@ -3,20 +3,16 @@
  */
 
 /* Links */
-a,
-a:focus,
-a:hover {
-  color: #fff;
-}
+
 /* Custom default button */
-.btn-secondary,
-.btn-secondary:hover,
-.btn-secondary:focus {
-  color: #333;
+
+#signup_btn{
+  color: #fff;
   text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #fff;
-  border: .05rem solid #fff;
+  background-color: #B9529F;
+  border: .05rem solid rgba(222, 111, 255, .9);
 }
+
 
 
 
@@ -43,7 +39,7 @@ body {
 }
 
 .slide-image{
-  width: 60%;
+  width: 70%;
   border-radius: 10%;
   margin: 20px;
 }
@@ -112,9 +108,4 @@ body {
 
 .logo_img {
   margin 0 0 0 0;
-}
-
-
-#signup_btn{
-  color: #B9529F;
 }
