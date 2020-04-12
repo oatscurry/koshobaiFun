@@ -41,10 +41,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get("/", function(req, res){
   res.sendFile(__dirname + "../signup.html");
 });
-app.get("/success.html", function(req, res){
+app.get("/success", function(req, res){
   res.sendFile(__dirname + "../success.html");
 });
-app.get("/failure.html", function(req, res){
+app.get("/failure", function(req, res){
   res.sendFile(__dirname + "../failure.html");
 });
 
@@ -75,9 +75,9 @@ app.post("/", function(req, res){
   const jsonData = JSON.stringify(data);
   const request = https.request(url, options, function(response){
     if(response.statusCode === 200){
-      res.sendFile(__dirname + "/success.html");
+      res.send({redirect:'/success'});
     } else {
-      res.sendFile(__dirname + "/failure.html");
+      res.send({redirect:'/failure'});
     }
     response.on("data", function(data){
       dataLogger.message = JSON.parse(data);
@@ -90,15 +90,6 @@ app.post("/", function(req, res){
 
   request.write(jsonData);
   request.end();
-});
-
-// these two post methods aren't working
-app.post("/success.html", function(req, res){
-  res.redirect("/");
-});
-
-app.post("/failure.html", function(req, res){
-  res.redirect("/");
 });
 
 app.listen("3000", function(){
