@@ -54,11 +54,11 @@ app.post("/", function(req, res){
   request.end();
 });
 
-app.post("/failure", function(req, res){
+app.post("/", function(req, res){
   res.redirect("/");
 });
 
-app.post("/success", function(req, res){
+app.post("/", function(req, res){
   res.redirect("/");
 });
 
