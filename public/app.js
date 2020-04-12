@@ -13,10 +13,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get("/", function(req, res){
   res.sendFile(__dirname + "../signup.html");
 });
-app.get("/success", function(req, res){
+app.get("/success.html", function(req, res){
   res.sendFile(__dirname + "../success.html");
 });
-app.get("/failure", function(req, res){
+app.get("/failure.html", function(req, res){
   res.sendFile(__dirname + "../failure.html");
 });
 
@@ -60,11 +60,11 @@ app.post("/", function(req, res){
   request.end();
 });
 
-app.post("/success", function(req, res){
+app.post("/success.html", function(req, res){
   res.redirect("/");
 });
 
-app.post("/failure", function(req, res){
+app.post("/failure.html", function(req, res){
   res.redirect("/");
 });
 
