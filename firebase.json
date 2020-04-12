@@ -4,8 +4,7 @@
      "source": "**",
      "function": "app"
    } ],
-   "public": "public",
-
+   "public":"public",
     "ignore": [
       "firebase.json",
       "**/.*",

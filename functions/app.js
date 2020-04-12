@@ -8,25 +8,30 @@ const https = require("https");
 
 const app = express();
 
-app.use(express.static("../public"));
+//app.use(express.static("../public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
 // these three get methods aren't working
 app.get("/", function(req, res){
   // res.sendFile(__dirname + "../signup.html");
   // res.sendFile("signup.html");
-  res.json({hello: 'world'});
+  res.sendFile(__dirname +"/index.html");
+});
+app.get("/signup", function(req, res){
+  // res.sendFile(__dirname + "../signup.html");
+  // res.sendFile("signup.html");
+  res.sendFile(__dirname +"/signup.html");
 });
 app.get("/success", function(req, res){
   // res.sendFile(__dirname + "../success.html");
-  res.sendFile('success.html');
+  res.sendFile(__dirname +"/success.html");
 });
 app.get("/failure", function(req, res){
-  res.sendFile('failure.html');
+  res.sendFile(__dirname +"/failure.html");
 });
 
 
-app.post("/", function(req, res){
+app.post("/signup", function(req, res){
   let firstName = req.body.fName;
   let lastName = req.body.lName;
   let email = req.body.email;
@@ -53,9 +58,9 @@ app.post("/", function(req, res){
   const request = https.request(url, options, function(response){
     console.log(response);
     if(response.statusCode === 200){
-      res.redirect('/success');
+      res.redirect(303,'/success');
     } else {
-      res.redirect('/failure');
+      res.redirect(303,'/failure');
     }
     response.on("data", function(data){
       console.log(JSON.parse(data));
@@ -66,10 +71,6 @@ app.post("/", function(req, res){
 
   request.write(jsonData);
   request.end();
-});
-
-app.listen("3000", function(){
-  console.log("Listening in on port 3000...");
 });
 
 exports.app = functions.https.onRequest(app);
