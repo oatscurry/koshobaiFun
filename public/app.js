@@ -75,9 +75,9 @@ app.post("/", function(req, res){
   const jsonData = JSON.stringify(data);
   const request = https.request(url, options, function(response){
     if(response.statusCode === 200){
-      res.send({redirect:'/success'});
+      response.send({redirect:'/success'});
     } else {
-      res.send({redirect:'/failure'});
+      response.send({redirect:'/failure'});
     }
     response.on("data", function(data){
       dataLogger.message = JSON.parse(data);
