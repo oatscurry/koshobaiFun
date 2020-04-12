@@ -13,6 +13,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get("/", function(req, res){
   res.sendFile(__dirname + "../signup.html");
 });
+app.get("/success", function(req, res){
+  res.sendFile(__dirname + "../success.html");
+});
+app.get("/failure", function(req, res){
+  res.sendFile(__dirname + "../failure.html");
+});
 
 
 app.post("/", function(req, res){
@@ -54,11 +60,11 @@ app.post("/", function(req, res){
   request.end();
 });
 
-app.post("/", function(req, res){
+app.post("/success", function(req, res){
   res.redirect("/");
 });
 
-app.post("/", function(req, res){
+app.post("/failure", function(req, res){
   res.redirect("/");
 });
 
