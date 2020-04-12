@@ -5,11 +5,39 @@ const request = require ("request");
 const bodyParser = require("body-parser");
 const https = require("https");
 
+const { Logging } = require('@google-cloud/logging');
+
+const logging = new Logging();
+const log = logging.log('logger');
+
+// This metadata is attached to each log entry. This specifies a fake
+// Cloud Function called 'Custom Metrics' in order to make your custom
+// log entries appear in the Cloud Functions logs viewer.
+const METADATA = {
+  resource: {
+    type: 'cloud_function',
+    labels: {
+      function_name: 'CustomMetrics',
+      region: 'us-central1'
+    }
+  }
+};
+
+// ...
+
+// Data to write to the log. This can be a JSON object with any properties
+// of the event you want to record.
+let dataLogger = {
+  event: 'event!',
+  value: 'mailchimp'
+};
+
 const app = express();
 
 app.use(express.static("../public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
+// these three get methods aren't working
 app.get("/", function(req, res){
   res.sendFile(__dirname + "../signup.html");
 });
@@ -52,7 +80,11 @@ app.post("/", function(req, res){
       res.sendFile(__dirname + "/failure.html");
     }
     response.on("data", function(data){
-      console.log(JSON.parse(data));
+      dataLogger.message = JSON.parse(data);
+      // Write to the log. The log.write() call returns a Promise if you want to
+      // make sure that the log was written successfully.
+      let entry = log.entry(METADATA, dataLogger);
+      log.write(entry);
     });
   });
 
@@ -60,6 +92,7 @@ app.post("/", function(req, res){
   request.end();
 });
 
+// these two post methods aren't working
 app.post("/success.html", function(req, res){
   res.redirect("/");
 });
