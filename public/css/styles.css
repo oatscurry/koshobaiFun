@@ -84,6 +84,12 @@ body {
   .nav-masthead {
     float: right;
   }
+
+  .slide-image{
+    width: 50%;
+    border-radius: 10%;
+    margin: 0px;
+  }
 }
 
 
@@ -98,12 +104,14 @@ body {
   font-weight: 700;
 }
 
-
+.cover-container {
+    max-width:none;
+}
 /*
  * Footer
  */
 .mastfoot {
-  color: rgba(255, 255, 255, .5);
+  color: rgba(255, 255, 255, 1.0);
 }
 
 .logo_img {
