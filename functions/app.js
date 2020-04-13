@@ -73,4 +73,5 @@ app.post("/signup", function(req, res){
   request.end();
 });
 
+// research this
 exports.app = functions.https.onRequest(app);
